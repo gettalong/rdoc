@@ -60,12 +60,14 @@ class RDoc::Markup::Document
   end
 
   ##
-  # Runs this document and all its #items through +visitor+
+  # Runs this document and all its #parts through +visitor+
 
   def accept visitor
     visitor.start_accepting
 
     visitor.accept_document self
+
+    parts.each {|part| visitor.accept(part) }
 
     visitor.end_accepting
   end
